@@ -8,11 +8,8 @@
 //   vowels('Why?') --> 0
 
 function vowels(str) {
-  let v = 0
-  for(let char of str){
-    (/^[aeiou]$/i).test(char) && v++
-  }
-  return v
+  const matches = str.match(/[aeiou]/gi)
+  return matches ? matches.length : 0
 }
 
 module.exports = vowels;
