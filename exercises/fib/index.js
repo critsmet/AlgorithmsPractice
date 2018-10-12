@@ -10,14 +10,22 @@
 
 function fib(n) {
 
-  let fibArray = []
-
-  for(let i = 0; i <=n; i++){
-    isNaN(fibArray[i - 2]) ? fibArray[i] = i : fibArray[i] = fibArray[i - 1] + fibArray[i - 2]
+  if(n < 2){
+    return n
   }
 
-  return fibArray[n]
+  return fib(n - 1) + fib(n-2)
 
 }
+
+// function fib(n) {
+//
+//   let fibArray = []
+//
+//   for(let i = 0; i <=n; i++){
+//     isNaN(fibArray[i - 2]) ? fibArray[i] = i : fibArray[i] = fibArray[i - 1] + fibArray[i - 2]
+//   }
+//   return fibArray[n]
+// }
 
 module.exports = fib;
