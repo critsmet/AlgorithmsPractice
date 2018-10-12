@@ -8,6 +8,16 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {}
+function fib(n) {
+
+  let fibArray = []
+
+  for(let i = 0; i <=n; i++){
+    isNaN(fibArray[i - 2]) ? fibArray[i] = i : fibArray[i] = fibArray[i - 1] + fibArray[i - 2]
+  }
+
+  return fibArray[n]
+
+}
 
 module.exports = fib;
