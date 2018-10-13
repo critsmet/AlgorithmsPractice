@@ -21,10 +21,10 @@ class LinkedList {
   }
 
   size(){
-    let head = this.head
+    let node = this.head
     let n = 0
-    while(head){
-      head = head.next
+    while(node){
+      node = node.next
       n++
     }
     return n
@@ -34,12 +34,18 @@ class LinkedList {
     return this.head
   }
 
-  getLast(){
-    let head = this.head
-    while(head.next){
-      head = head.next
+  getLast() {
+    if (!this.head) {
+      return null;
     }
-    return head
+
+    let node = this.head;
+    while (node) {
+      if (!node.next) {
+        return node;
+      }
+      node = node.next;
+    }
   }
 
   clear(){
@@ -73,35 +79,65 @@ class LinkedList {
     previous.next = null;
   }
 
-  insertLast(data){
-    if (!this.head) {
-      this.head = new Node(data)
+  insertLast(data) {
+    const last = this.getLast();
+
+    if (last) {
+      // There are some existing nodes in our chain
+      last.next = new Node(data);
+    } else {
+      // The chain is empty!
+      this.head = new Node(data);
     }
-
-    let head = this.head
-
-    while(head.next){
-      head = head.next
-    }
-
-    return head.next = new Node(data)
   }
 
-  getAt(n){
+  getAt(index){
 
-    if(n > this.size() - 1){
-      return null
+    let counter = 0;
+    let node = this.head;
+    while (node) {
+      if (counter === index) {
+        return node;
+      }
+
+      counter++;
+      node = node.next;
+    }
+    return null;
+  }
+
+  removeAt(index) {
+    if (!this.head) {
+      return;
     }
 
-    let node = this.head
-    let counter = 0
-
-    while(counter <= n){
-      node = node.next
-      counter++
+    if (index === 0) {
+      this.head = this.head.next;
+      return;
     }
 
-    return node
+    const previous = this.getAt(index - 1);
+    if (!previous || !previous.next) {
+      return;
+    }
+    previous.next = previous.next.next;
+  }
+
+  insertAt(data, n){
+
+    if(!this.head){
+      this.head = new Node(data)
+      return
+    }
+
+    if(n === 0){
+      this.head = new Node(data, this.head);
+      return
+    }
+
+    let previous = this.getAt(n - 1) || this.getLast()
+    previous.next = new Node(data, previous.next)
+    return
   }
 
 }
